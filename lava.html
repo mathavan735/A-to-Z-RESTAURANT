@@ -1,0 +1,29 @@
+<HTML>
+    <HEAD>
+        <title>Vote</title>
+    </HEAD>
+    <BODY>
+        <!-- Create a form to be able to send the vote to the server in the simplest way, but don't display it -->
+        <form action="thispage.html" method="post" style="display:none;">
+            <!-- I don't know what possible values there are. I'll just take 'foo' and 'bar'. Of course you can add more. -->
+            <input type="radio" name="vote" value="foo" />
+            <input type="radio" name="vote" value="bar" />
+        </form>
+
+        <!-- The images representing the (invisible) radio button -->
+        <!-- I use the data-value attribute to store to which radio button this image corresponds -->
+        <img src="path/to/foo/image" data-value="foo" />Vote FOO<br />
+        <img src="path/to/bar/image" data-value="bar" />Vote BAR<br />
+
+        <!-- Import jQuery for the sake of simplicity. -->
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <!-- The trickiest part. The script. -->
+        <script>
+            $("img").click(function() {
+                 var value = $(this).data('value');        // Get the value
+                 $("input[value='" + value + "']").click();// Click the corresponding radio button
+                 $("form").submit(); // Submit the form.
+            });
+        </script>
+    </BODY>
+</HTML>
